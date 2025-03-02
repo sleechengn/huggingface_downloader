@@ -9,7 +9,7 @@ def download(id):
         os.makedirs(root_path)
     if len(sys.argv)>2 :
         file = sys.argv[2]
-        url = f"https://huggingface.co/{id}/resolve/main/{file_name}?download=true"
+        url = f"https://huggingface.co/{id}/resolve/main/{file}?download=true"
         file_path = f"{root_path}/{file}"
         aria2_filepath = f"{file_path}.aria2"
         if os.path.exists(aria2_filepath):
