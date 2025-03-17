@@ -3,13 +3,14 @@ import sys
 import huggingface_hub as hf
 
 def download(id):
+    hf_endpoint = "https://huggingface.co"
     split_part = id.split("/")
     root_path = "--".join(split_part)
     if not os.path.exists(root_path):
         os.makedirs(root_path)
     if len(sys.argv)>2 :
         file = sys.argv[2]
-        url = f"https://huggingface.co/{id}/resolve/main/{file}?download=true"
+        url = f"{hf_endpoint}/{id}/resolve/main/{file}?download=true"
         file_path = f"{root_path}/{file}"
         aria2_filepath = f"{file_path}.aria2"
         if os.path.exists(aria2_filepath):
@@ -24,7 +25,7 @@ def download(id):
     else:
         list = hf.list_repo_files(repo_id=id)
         for file in list:
-            url = f"https://huggingface.co/{id}/resolve/main/{file}?download=true"
+            url = f"{hf_endpoint}/{id}/resolve/main/{file}?download=true"
             url = url.replace(" ","%20")
             file_path = f"{root_path}/{file}"
             aria2_filepath = f"{file_path}.aria2"
