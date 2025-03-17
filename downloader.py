@@ -15,10 +15,10 @@ def download(id):
         if os.path.exists(aria2_filepath):
             os.remove(aria2_filepath)
             os.remove(file_path)
-            os.system(f"aria2c -x 10 -j 10 \"{url}\" -o \"{file_path}\"")
+            os.system(f"aria2c -x 10 -j 10 -k 1M \"{url}\" -o \"{file_path}\"")
         elif not os.path.exists(file_path):
             print(f"download {url} to {file_path}")
-            os.system(f"aria2c -x 10 -j 10 \"{url}\" -o \"{file_path}\"")
+            os.system(f"aria2c -x 10 -j 10 -k 1M \"{url}\" -o \"{file_path}\"")
         else:
             print(f"exists {file_path}")
     else:
@@ -31,10 +31,10 @@ def download(id):
             if os.path.exists(aria2_filepath):
                 os.remove(aria2_filepath)
                 os.remove(file_path)
-                os.system(f"aria2c -x 10 -j 10 \"{url}\" -o \"{file_path}\"")
+                os.system(f"aria2c -x 10 -j 10 -k 1M \"{url}\" -o \"{file_path}\"")
             elif not os.path.exists(file_path):
                 print(f"download {url} to {file_path}")
-                os.system(f"aria2c -x 10 -j 10 \"{url}\" -o \"{file_path}\"")
+                os.system(f"aria2c -x 10 -j 10 -k 1M \"{url}\" -o \"{file_path}\"")
             else:
                 print(f"exists {file_path}")
         hf.snapshot_download(repo_id=id,local_dir=root_path)
