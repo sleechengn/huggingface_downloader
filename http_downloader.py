@@ -10,7 +10,8 @@ def download(url:str):
             file_name = sys.argv[2]
             os.system(f"aria2c -x 10 -j 10 -k 1M \"{url}\" -o \"{file_name}\"")
         else:
-            file_name = input(prompt = "please input out filename:")
+            print("please input out filepath:")
+            file_name = input()
             os.system(f"aria2c -x 10 -j 10 -k 1M \"{url}\" -o \"{file_name}\"")
     else:
         if len(sys.argv) > 2:
