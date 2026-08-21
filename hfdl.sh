@@ -2,7 +2,8 @@
 
 WORK_PATH=$(realpath $(pwd))
 SCRIPT_PATH=$(realpath $(dirname $0))
-
+echo "WORK      PATH:$WORK_PATH"
+echo "SCRIPT    PATH:$SCRIPT_PATH"
 if ! command -v aria2c > /dev/null 2>&1; then
     if command -v apt > /dev/null 2>&1; then
         apt install -y aria2
