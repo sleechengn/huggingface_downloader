@@ -12,4 +12,20 @@ fi
 if [ -e "$WORK_PATH/python/bin/activate" ]; then
     . $WORK_PATH/python/bin/activate
     HF_ENDPOINT=${HF_ENDPOINT:-https://hf-mirror.com} python $SCRIPT_PATH/hf_downloader.py $*
+else
+    if [ ! -e "$WORK_PATH/uv-x86_64-unknown-linux-gnu/uv" ]; then
+        DOWNLOAD=$(curl -s https://api.github.com/repos/astral-sh/uv/releases/latest | grep browser_download_url |grep linux|grep amd64| grep -v rocm| cut -d'"' -f4)
+	    aria2c -x 10 -j 10 -k 1M "$DOWNLOAD" -o "${WORK_PATH}/uv.tar.gz"
+        tar -zxvf ${WORK_PATH}/uv.tar.gz
+        rm -rf ${WORK_PATH}/uv.tar.gz
+        chmod +x ${WORK_PATH}/uv-x86_64-unknown-linux-gnu/uv
+        ${WORK_PATH}/uv-x86_64-unknown-linux-gnu/uv venv --python 3.14 ${WORK_PATH}/python
+        . $WORK_PATH/python/bin/activate
+        HF_ENDPOINT=${HF_ENDPOINT:-https://hf-mirror.com} python $SCRIPT_PATH/hf_downloader.py $*
+    else
+        ${WORK_PATH}/uv-x86_64-unknown-linux-gnu/uv venv --python 3.14 ${WORK_PATH}/python
+        . $WORK_PATH/python/bin/activate
+        HF_ENDPOINT=${HF_ENDPOINT:-https://hf-mirror.com} python $SCRIPT_PATH/hf_downloader.py $*
+    fi
+
 fi
