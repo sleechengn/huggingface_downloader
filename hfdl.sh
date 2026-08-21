@@ -21,10 +21,12 @@ else
         chmod +x ${WORK_PATH}/uv-x86_64-unknown-linux-gnu/uv
         ${WORK_PATH}/uv-x86_64-unknown-linux-gnu/uv venv --python 3.14 ${WORK_PATH}/python
         . $WORK_PATH/python/bin/activate
+        ${WORK_PATH}/uv-x86_64-unknown-linux-gnu/uv pip install pip
         HF_ENDPOINT=${HF_ENDPOINT:-https://hf-mirror.com} python $SCRIPT_PATH/hf_downloader.py $*
     else
         ${WORK_PATH}/uv-x86_64-unknown-linux-gnu/uv venv --python 3.14 ${WORK_PATH}/python
         . $WORK_PATH/python/bin/activate
+        ${WORK_PATH}/uv-x86_64-unknown-linux-gnu/uv pip install pip
         HF_ENDPOINT=${HF_ENDPOINT:-https://hf-mirror.com} python $SCRIPT_PATH/hf_downloader.py $*
     fi
 
