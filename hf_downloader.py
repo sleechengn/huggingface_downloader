@@ -1,9 +1,11 @@
 import os
 import sys
 import huggingface_hub as hf
-
+os.environ.
 def download(id):
     hf_endpoint = "https://huggingface.co"
+    if "HF_ENDPOINT" in os.environ:
+        hf_endpoint = os.environ["HF_ENDPOINT"]
     split_part = id.split("/")
     root_path = "--".join(split_part)
     if not os.path.exists(root_path):
